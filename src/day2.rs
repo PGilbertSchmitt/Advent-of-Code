@@ -116,7 +116,7 @@ fn get_sum_of_complex_invalids(input: &str) -> usize {
 #[test]
 fn part1() {
     assert_eq!(1227775554, get_sum_of_invalids(SAMPLE));
-    assert_eq!(1227775554, get_sum_of_invalids(INPUT));
+    assert_eq!(23560874270, get_sum_of_invalids(INPUT));
 }
 
 #[test]
