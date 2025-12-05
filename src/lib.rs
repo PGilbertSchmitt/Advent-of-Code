@@ -9,3 +9,6 @@ pub mod day3;
 
 #[cfg(test)]
 pub mod day4;
+
+#[cfg(test)]
+pub mod day5;
