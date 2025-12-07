@@ -1,5 +1,4 @@
-use std::collections::HashSet;
-
+use fxhash::FxHashSet;
 use logos::Logos;
 
 const SAMPLE: &'static str = "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,
@@ -89,7 +88,7 @@ fn possible_repeat_values(start: &str, end: &str) -> Vec<usize> {
 }
 
 fn complex_id_sum(start: &str, end: &str) -> usize {
-    let possible_ids: HashSet<usize> = possible_repeat_values(start, end).into_iter().collect();
+    let possible_ids: FxHashSet<usize> = possible_repeat_values(start, end).into_iter().collect();
 
     let start: usize = start.parse().unwrap();
     let end: usize = end.parse().unwrap();
