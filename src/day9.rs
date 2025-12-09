@@ -16,7 +16,7 @@ const SAMPLE: &'static str = "
 const INPUT: &'static str = include_str!("./inputs/day9.txt");
 
 #[derive(Debug)]
-struct Tile (isize, isize);
+struct Tile(isize, isize);
 
 #[derive(Logos, Debug)]
 #[logos(skip "\n")]
@@ -30,10 +30,12 @@ enum Token {
 
 fn parse_tiles(input: &str) -> Vec<Tile> {
     let tokens = Token::lexer(input);
-    tokens.map(|t| {
-        let Token::TileToken(tile) = t.unwrap();
-        tile
-    }).collect()
+    tokens
+        .map(|t| {
+            let Token::TileToken(tile) = t.unwrap();
+            tile
+        })
+        .collect()
 }
 
 fn largest_rect(input: &str) -> isize {
@@ -45,7 +47,7 @@ fn largest_rect(input: &str) -> isize {
             largest_area = largest_area.max(((ax - bx).abs() + 1) * ((ay - by).abs() + 1));
         }
     }
-    
+
     largest_area
 }
 
@@ -69,10 +71,34 @@ impl Dir {
 
     fn transform(&self, clockwise: bool) -> Self {
         match self {
-            Self::Up => if clockwise { Self::Right } else { Self::Left }
-            Self::Down => if clockwise { Self::Left } else { Self::Right }
-            Self::Left => if clockwise { Self::Up } else { Self::Down }
-            Self::Right => if clockwise { Self::Down } else { Self::Up }
+            Self::Up => {
+                if clockwise {
+                    Self::Right
+                } else {
+                    Self::Left
+                }
+            }
+            Self::Down => {
+                if clockwise {
+                    Self::Left
+                } else {
+                    Self::Right
+                }
+            }
+            Self::Left => {
+                if clockwise {
+                    Self::Up
+                } else {
+                    Self::Down
+                }
+            }
+            Self::Right => {
+                if clockwise {
+                    Self::Down
+                } else {
+                    Self::Up
+                }
+            }
         }
     }
 }
@@ -123,7 +149,7 @@ impl<'a> Line<'a> {
             Dir::Up => self.start.1,
         }
     }
-    
+
     fn is_vertical(&self) -> bool {
         match self.dir {
             Dir::Up | Dir::Down => true,
@@ -192,7 +218,7 @@ impl Rect {
         if line.start.0 < self.min_x || line.start.0 > self.max_x {
             return false;
         }
-        
+
         // Now we check if the line segment's range intersects the y-axis of the rect exlusively
         if !exclusive_range_overlap(self.min_y, self.max_y, line.min_scalar(), line.max_scalar()) {
             return false;
@@ -202,7 +228,8 @@ impl Rect {
         // so we do an "outside" check. If "outside" is to the right, then the line intersects as long as it's
         // not on the right edge. If "outside" is to the left, then the line intersects as long as it's not
         // on the left edge.
-        (line.outside == Dir::Right && line.start.0 != self.max_x) || (line.outside == Dir::Left && line.start.0 != self.min_x)
+        (line.outside == Dir::Right && line.start.0 != self.max_x)
+            || (line.outside == Dir::Left && line.start.0 != self.min_x)
         // Now figure out the rest...
     }
 
@@ -216,7 +243,8 @@ impl Rect {
             return false;
         }
 
-        (line.outside == Dir::Down && line.start.1 != self.max_y) || (line.outside == Dir::Up && line.start.1 != self.min_y)
+        (line.outside == Dir::Down && line.start.1 != self.max_y)
+            || (line.outside == Dir::Up && line.start.1 != self.min_y)
     }
 }
 
@@ -239,7 +267,7 @@ fn largest_internal_rect(input: &str) -> isize {
             }
         }
     }
-    
+
     // The first step is to find one line that is guaranteed to be  the furthest in one dimension,
     // so that we can tell which side is outside
     let leftmost_line = lines.get_mut(leftmost_line_idx).unwrap();
@@ -250,7 +278,7 @@ fn largest_internal_rect(input: &str) -> isize {
         Dir::Down => {
             leftmost_line.outside = Dir::Right;
         }
-        _ => unreachable!()
+        _ => unreachable!(),
     }
 
     let mut prev_line_dir = leftmost_line.dir;
@@ -268,7 +296,7 @@ fn largest_internal_rect(input: &str) -> isize {
         prev_line_dir = next_line.dir;
         prev_line_outside = next_line.outside;
     }
-    
+
     let mut horizontal_lines = Vec::new();
     let mut vertical_lines = Vec::new();
     for line in &lines {
@@ -303,7 +331,6 @@ fn part1() {
     assert_eq!(50, largest_rect(SAMPLE));
     assert_eq!(4750092396, largest_rect(INPUT));
 }
-
 
 #[test]
 fn part2() {

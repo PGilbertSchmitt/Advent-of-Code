@@ -56,7 +56,11 @@ fn parse_junctions(input: &str) -> Vec<Coor3D> {
         .collect()
 }
 
-fn circuit_size(point: usize, flooded: &mut FxHashSet<usize>, circuits: &mut FxHashMap<usize, Rc<RefCell<Point>>>) -> usize {
+fn circuit_size(
+    point: usize,
+    flooded: &mut FxHashSet<usize>,
+    circuits: &mut FxHashMap<usize, Rc<RefCell<Point>>>,
+) -> usize {
     if flooded.contains(&point) {
         return 0;
     }
@@ -99,21 +103,38 @@ fn connect_circuits(input: &str, connections: usize) -> (usize, i64) {
             part1 = circuit_sizes[0..3].iter().product()
         }
 
-        let point_a = circuit_tracker.entry(*a_idx).or_insert_with(|| Rc::new(RefCell::new(Point { connections: FxHashSet::default() }))).clone();
-        let point_b = circuit_tracker.entry(*b_idx).or_insert_with(|| Rc::new(RefCell::new(Point { connections: FxHashSet::default() })));
+        let point_a = circuit_tracker
+            .entry(*a_idx)
+            .or_insert_with(|| {
+                Rc::new(RefCell::new(Point {
+                    connections: FxHashSet::default(),
+                }))
+            })
+            .clone();
+        let point_b = circuit_tracker.entry(*b_idx).or_insert_with(|| {
+            Rc::new(RefCell::new(Point {
+                connections: FxHashSet::default(),
+            }))
+        });
         point_a.borrow_mut().connections.insert(*b_idx);
         point_b.borrow_mut().connections.insert(*a_idx);
 
         // Once the circuit tracker has added each point at least once, we can start looking for the full connection
         if circuit_tracker.len() == num_points {
             let (first_point, _) = circuit_tracker.iter().next().unwrap();
-            if num_points == circuit_size(*first_point, &mut FxHashSet::<usize>::default(), &mut circuit_tracker) {
+            if num_points
+                == circuit_size(
+                    *first_point,
+                    &mut FxHashSet::<usize>::default(),
+                    &mut circuit_tracker,
+                )
+            {
                 // Connected all sub-graphs
                 let part2 = junctions.get(*a_idx).unwrap().0 * junctions.get(*b_idx).unwrap().0;
-                return (part1, part2)
+                return (part1, part2);
             }
         }
-    };
+    }
 
     (0, 0)
 }
