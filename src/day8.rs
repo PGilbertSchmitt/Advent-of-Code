@@ -147,5 +147,5 @@ fn part1() {
 
     let (three_largest_input, first_total_connection_input) = connect_circuits(INPUT, 1000);
     assert_eq!(83520, three_largest_input);
-    assert_eq!(1131823407, first_total_connection_input);
+    assert_eq!(1_131_823_407, first_total_connection_input);
 }

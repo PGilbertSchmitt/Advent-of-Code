@@ -159,12 +159,12 @@ fn evaluate(homework: &Homework) -> usize {
 
 #[test]
 fn part1() {
-    assert_eq!(4277556, evaluate(&parse_homework(SAMPLE)));
-    assert_eq!(6171290547579, evaluate(&parse_homework(INPUT)));
+    assert_eq!(4_277_556, evaluate(&parse_homework(SAMPLE)));
+    assert_eq!(6_171_290_547_579, evaluate(&parse_homework(INPUT)));
 }
 
 #[test]
 fn part2() {
-    assert_eq!(3263827, eval_cephalopod_homework(SAMPLE));
-    assert_eq!(8811937976367, eval_cephalopod_homework(INPUT));
+    assert_eq!(3_263_827, eval_cephalopod_homework(SAMPLE));
+    assert_eq!(8_811_937_976_367, eval_cephalopod_homework(INPUT));
 }

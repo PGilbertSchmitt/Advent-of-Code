@@ -82,6 +82,6 @@ fn part1() {
 
 #[test]
 fn part2() {
-    assert_eq!(3121910778619, total_extreme_joltages(SAMPLE));
-    assert_eq!(172886048065379, total_extreme_joltages(INPUT));
+    assert_eq!(3_121_910_778_619, total_extreme_joltages(SAMPLE));
+    assert_eq!(172_886_048_065_379, total_extreme_joltages(INPUT));
 }

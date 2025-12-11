@@ -114,12 +114,12 @@ fn get_sum_of_complex_invalids(input: &str) -> usize {
 
 #[test]
 fn part1() {
-    assert_eq!(1227775554, get_sum_of_invalids(SAMPLE));
-    assert_eq!(23560874270, get_sum_of_invalids(INPUT));
+    assert_eq!(1_227_775_554, get_sum_of_invalids(SAMPLE));
+    assert_eq!(23_560_874_270, get_sum_of_invalids(INPUT));
 }
 
 #[test]
 fn part2() {
-    assert_eq!(4174379265, get_sum_of_complex_invalids(SAMPLE));
-    assert_eq!(44143124633, get_sum_of_complex_invalids(INPUT));
+    assert_eq!(4_174_379_265, get_sum_of_complex_invalids(SAMPLE));
+    assert_eq!(44_143_124_633, get_sum_of_complex_invalids(INPUT));
 }

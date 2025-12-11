@@ -130,5 +130,5 @@ fn both_parts() {
 
     let (classical_splits, multiversal_splits) = count_splits(INPUT);
     assert_eq!(1646, classical_splits);
-    assert_eq!(32451134474991, multiversal_splits);
+    assert_eq!(32_451_134_474_991, multiversal_splits);
 }

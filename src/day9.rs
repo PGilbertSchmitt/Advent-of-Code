@@ -329,11 +329,11 @@ fn largest_internal_rect(input: &str) -> isize {
 #[test]
 fn part1() {
     assert_eq!(50, largest_rect(SAMPLE));
-    assert_eq!(4750092396, largest_rect(INPUT));
+    assert_eq!(4_750_092_396, largest_rect(INPUT));
 }
 
 #[test]
 fn part2() {
     assert_eq!(24, largest_internal_rect(SAMPLE));
-    assert_eq!(1468516555, largest_internal_rect(INPUT));
+    assert_eq!(1_468_516_555, largest_internal_rect(INPUT));
 }

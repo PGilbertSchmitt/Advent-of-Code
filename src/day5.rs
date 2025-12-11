@@ -121,5 +121,5 @@ fn part1() {
 #[test]
 fn part2() {
     assert_eq!(14, count_total_fresh_ingredients(SAMPLE));
-    assert_eq!(354143734113772, count_total_fresh_ingredients(INPUT));
+    assert_eq!(354_143_734_113_772, count_total_fresh_ingredients(INPUT));
 }
