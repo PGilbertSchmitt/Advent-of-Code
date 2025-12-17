@@ -51,17 +51,4 @@ impl<K: Ord, V> MinHeap<K, V> {
     pub fn peak(&self) -> Option<(&K, &V)> {
         self.0.peek().map(|wrapper| (&wrapper.key, &wrapper.value))
     }
-
-    // pub fn into_iter(self) -> IntoIter<K, V> {
-    //     IntoIter(self)
-    // }
 }
-
-// pub struct IntoIter<K: Ord, V>(MinHeap<K, V>);
-
-// impl<K: Ord, V> Iterator for IntoIter<K, V> {
-//     type Item = (K, V);
-//     fn next(&mut self) -> Option<Self::Item> {
-//         self.0.pop()
-//     }
-// }

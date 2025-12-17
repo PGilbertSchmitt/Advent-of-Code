@@ -25,7 +25,6 @@ enum Token {
     Number(usize),
 }
 
-#[derive(Debug)]
 enum Op {
     Add,
     Multiply,
@@ -55,7 +54,6 @@ impl Op {
     }
 }
 
-#[derive(Debug)]
 struct Homework {
     rows: Vec<Vec<usize>>,
     operations: Vec<Op>,

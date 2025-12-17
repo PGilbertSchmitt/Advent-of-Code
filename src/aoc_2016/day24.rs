@@ -1,5 +1,5 @@
-use std::{collections::VecDeque, u32, u64};
 use itertools::Itertools;
+use std::{collections::VecDeque, u32, u64};
 
 use fxhash::{FxHashMap, FxHashSet};
 
@@ -12,7 +12,6 @@ const SAMPLE: &str = "
 
 const INPUT: &str = include_str!("./inputs/day24.txt");
 
-#[derive(Debug)]
 enum Space {
     Wall,
     Empty,
@@ -56,7 +55,11 @@ fn neighbors(&(x, y): &Coord) -> [Coord; 4] {
     [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)]
 }
 
-fn find_connections(grid: &Grid, start_interface: &Interface, connections: &mut FxHashMap<(u32, u32), u64>) {
+fn find_connections(
+    grid: &Grid,
+    start_interface: &Interface,
+    connections: &mut FxHashMap<(u32, u32), u64>,
+) {
     let &(start, start_coord) = start_interface;
     let mut visited = FxHashSet::<Coord>::default();
     let mut queue = VecDeque::<(u64, Coord)>::new();
@@ -81,7 +84,9 @@ fn find_connections(grid: &Grid, start_interface: &Interface, connections: &mut 
                 }
                 Space::Interface(to) => {
                     let to = *to;
-                    if !connections.contains_key(&(start, to)) && !connections.contains_key(&(to, start)) {
+                    if !connections.contains_key(&(start, to))
+                        && !connections.contains_key(&(to, start))
+                    {
                         connections.insert((start, to), steps);
                         connections.insert((to, start), steps);
                     }
@@ -95,8 +100,12 @@ fn find_connections(grid: &Grid, start_interface: &Interface, connections: &mut 
 }
 
 // Traveling salesman is a lot easier when there are only 7 nodes to worry about
-fn find_shortest_path(connections: &FxHashMap<(u32, u32), u64>, interfaces: &Interfaces) -> (u64, u64) {
-    let (start, rest): (Vec<u32>, Vec<u32>) = interfaces.iter().map(|(x, _)| *x).partition(|a| *a == 0);
+fn find_shortest_path(
+    connections: &FxHashMap<(u32, u32), u64>,
+    interfaces: &Interfaces,
+) -> (u64, u64) {
+    let (start, rest): (Vec<u32>, Vec<u32>) =
+        interfaces.iter().map(|(x, _)| *x).partition(|a| *a == 0);
     let start = *start.first().unwrap();
     let mut shortest_path = u64::MAX;
     let mut shortest_path_with_reset = u64::MAX;

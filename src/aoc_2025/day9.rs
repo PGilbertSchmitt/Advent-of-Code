@@ -15,10 +15,9 @@ const SAMPLE: &'static str = "
 
 const INPUT: &'static str = include_str!("./inputs/day9.txt");
 
-#[derive(Debug)]
 struct Tile(isize, isize);
 
-#[derive(Logos, Debug)]
+#[derive(Logos)]
 #[logos(skip "\n")]
 enum Token {
     #[regex("[0-9]+,[0-9]+", |lex| {
@@ -51,7 +50,7 @@ fn largest_rect(input: &str) -> isize {
     largest_area
 }
 
-#[derive(Debug, PartialEq, Eq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 enum Dir {
     Up,
     Down,
@@ -103,7 +102,6 @@ impl Dir {
     }
 }
 
-#[derive(Debug)]
 struct Line<'a> {
     start: &'a Tile,
     end: &'a Tile,
@@ -174,7 +172,6 @@ fn to_lines<'a>(points: &'a Vec<Tile>) -> Vec<Line<'a>> {
     lines
 }
 
-#[derive(Debug)]
 struct Rect {
     min_x: isize,
     max_x: isize,

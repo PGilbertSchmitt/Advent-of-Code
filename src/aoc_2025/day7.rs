@@ -22,7 +22,6 @@ const INPUT: &'static str = include_str!("./inputs/day7.txt");
 
 type Pair = (isize, isize);
 
-#[derive(Debug)]
 struct Manifold {
     start: Pair,
     max_row: isize,

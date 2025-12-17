@@ -11,7 +11,7 @@ const SAMPLE: &str = "
 
 const INPUT: &str = include_str!("./inputs/day20.txt");
 
-#[derive(Logos, Debug)]
+#[derive(Logos)]
 #[logos(skip r"\n")]
 enum Token {
     #[regex("[0-9]+-[0-9]+", |lex| {

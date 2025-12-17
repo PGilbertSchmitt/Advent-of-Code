@@ -64,7 +64,7 @@ fn is_clock_signal(ins: &Vec<Instruction>, a: isize, max_attempts: usize) -> boo
                 ptr += 1;
             }
             // The program with Out doesn't have Tgl and vice versa
-            _ => unreachable!()
+            _ => unreachable!(),
         }
     }
 
@@ -74,7 +74,7 @@ fn is_clock_signal(ins: &Vec<Instruction>, a: isize, max_attempts: usize) -> boo
 
 fn search_for_signal(instructions: &Vec<Instruction>) -> isize {
     for x in 0..10000 {
-        // println!("Attempting {x}:");    
+        // println!("Attempting {x}:");
         if is_clock_signal(instructions, x, 10) {
             return x;
         }

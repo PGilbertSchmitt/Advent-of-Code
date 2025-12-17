@@ -15,7 +15,7 @@ use nohash_hasher::IntSet;
 // The third floor contains nothing relevant.
 // The fourth floor contains nothing relevant.
 
-#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+#[derive(Clone, Copy, PartialEq, Eq)]
 enum Element {
     // Part 1
     Hydrogen,
@@ -59,7 +59,7 @@ impl Element {
 
 use Element::*;
 
-#[derive(Clone, PartialEq, Eq, Debug)]
+#[derive(Clone, PartialEq, Eq)]
 enum Machine {
     Microchip(Element),
     Generator(Element),
@@ -92,7 +92,7 @@ impl Machine {
 
 use Machine::*;
 
-#[derive(PartialEq, Eq, Clone, Debug)]
+#[derive(PartialEq, Eq, Clone)]
 struct Building {
     elevator: u8,
     floor0: Vec<Machine>,

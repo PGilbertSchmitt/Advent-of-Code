@@ -15,7 +15,7 @@ move position 3 to position 0
 rotate based on position of letter b
 rotate based on position of letter d";
 
-#[derive(Logos, Debug)]
+#[derive(Logos)]
 #[logos(skip r"[\n ]", skip "on", skip "with", skip "to", skip "through", skip "step", skip "steps", skip "position", skip "letter")]
 enum Token {
     #[token("swap position")]
@@ -32,7 +32,7 @@ enum Token {
 
     #[token("rotate based on position of letter")]
     RotateBasedOn,
-    
+
     #[token("rotate left")]
     RotateLeft,
 
@@ -119,7 +119,9 @@ fn parse_instructions(input: &str) -> Vec<Instruction> {
                 let y = next_num(&mut tokens);
                 ins.push(Instruction::Move(x, y));
             }
-            Token::Char(_) | Token::Number(_) => panic!("Should not parse char or number outside of a command"),
+            Token::Char(_) | Token::Number(_) => {
+                panic!("Should not parse char or number outside of a command")
+            }
         }
     }
 
@@ -152,7 +154,7 @@ fn swap_letters(s: &mut MStr, a: char, b: char) {
 
     for loc in a_locations {
         s[loc] = b;
-    };
+    }
 }
 
 // RotateLeft(usize),
@@ -220,7 +222,7 @@ fn undo_rotate_based_on(s: &mut MStr, a: char) {
         3 => rotate_left(s, 2),
         4 => rotate_right(s, 1),
         5 => rotate_left(s, 3),
-        6 => {},
+        6 => {}
         7 => rotate_right(s, 4),
         _ => unreachable!(),
     }
@@ -282,11 +284,20 @@ fn unprocess_password(password: String, instructions: &Vec<Instruction>) -> Stri
 #[test]
 fn both_parts() {
     let instructions: Vec<Instruction> = parse_instructions(SAMPLE);
-    assert_eq!("decab", &process_password(String::from("abcde"), &instructions));
+    assert_eq!(
+        "decab",
+        &process_password(String::from("abcde"), &instructions)
+    );
 
     let instructions: Vec<Instruction> = parse_instructions(INPUT);
-    assert_eq!("cbeghdaf", &process_password(String::from("abcdefgh"), &instructions));
+    assert_eq!(
+        "cbeghdaf",
+        &process_password(String::from("abcdefgh"), &instructions)
+    );
 
     let reverse_instructions: Vec<Instruction> = instructions.into_iter().rev().collect();
-    assert_eq!("bacdefgh", &unprocess_password(String::from("fbgdceah"), &reverse_instructions));
+    assert_eq!(
+        "bacdefgh",
+        &unprocess_password(String::from("fbgdceah"), &reverse_instructions)
+    );
 }

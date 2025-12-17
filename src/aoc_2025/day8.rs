@@ -26,7 +26,7 @@ const SAMPLE: &'static str = "
 
 const INPUT: &'static str = include_str!("./inputs/day8.txt");
 
-#[derive(Clone, Debug)]
+#[derive(Clone)]
 struct Coor3D(i64, i64, i64);
 
 impl Coor3D {
@@ -36,7 +36,6 @@ impl Coor3D {
     }
 }
 
-#[derive(Debug)]
 struct Point {
     connections: FxHashSet<usize>,
 }

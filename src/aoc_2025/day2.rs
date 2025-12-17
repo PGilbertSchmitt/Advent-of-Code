@@ -7,7 +7,7 @@ const SAMPLE: &'static str = "11-22,95-115,998-1012,1188511880-1188511890,222220
 
 const INPUT: &'static str = include_str!("./inputs/day2.txt");
 
-#[derive(Debug, Logos)]
+#[derive(Logos)]
 #[logos(skip r"[,\-\n]")]
 enum Token {
     #[regex("[0-9]+", |lex| lex.slice().to_owned())]

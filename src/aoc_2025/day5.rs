@@ -13,7 +13,7 @@ const SAMPLE: &'static str = "
 
 const INPUT: &'static str = include_str!("./inputs/day5.txt");
 
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 struct Interval {
     pub start: usize,
     pub end: usize,
@@ -38,7 +38,6 @@ impl Interval {
     }
 }
 
-#[derive(Debug)]
 struct Inventory {
     intervals: Vec<Interval>,
     ingredients: Vec<usize>,

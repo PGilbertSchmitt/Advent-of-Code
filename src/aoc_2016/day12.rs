@@ -1,6 +1,6 @@
 use logos::{Lexer, Logos};
 
-#[derive(Logos, Debug)]
+#[derive(Logos)]
 #[logos(skip r"[\n ]")]
 pub enum Token {
     #[token("cpy")]
@@ -28,7 +28,6 @@ pub enum Token {
     Value(isize),
 }
 
-#[derive(Debug)]
 pub enum Operand {
     Register(usize),
     Value(isize),
@@ -59,7 +58,6 @@ impl From<Token> for Operand {
     }
 }
 
-#[derive(Debug)]
 pub enum Instruction {
     Cpy(Operand, Operand),
     Inc(Operand),
@@ -133,7 +131,9 @@ pub fn execute(ins: &Vec<Instruction>, a: isize, b: isize, c: isize, d: isize) -
                 }
                 ptr += 1;
             }
-            (false, Instruction::Inc(x)) | (true, Instruction::Dec(x)) | (true, Instruction::Tgl(x)) => {
+            (false, Instruction::Inc(x))
+            | (true, Instruction::Dec(x))
+            | (true, Instruction::Tgl(x)) => {
                 if let Operand::Register(x) = x {
                     state[*x] += 1;
                 }

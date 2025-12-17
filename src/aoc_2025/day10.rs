@@ -20,7 +20,7 @@ fn get_sequence(s: &str) -> Vec<u16> {
         .collect()
 }
 
-#[derive(Logos, Debug)]
+#[derive(Logos)]
 #[logos(skip r"[\n ]")]
 enum Token {
     #[regex(r"\[[.#]+\]", |lex| {
@@ -37,7 +37,6 @@ enum Token {
 
 type Button = (u16, Vec<u16>);
 
-#[derive(Debug)]
 struct Diagram {
     indicators: u16,
     buttons: Vec<Button>,

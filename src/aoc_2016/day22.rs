@@ -11,7 +11,7 @@ fn remove_t(s: &str) -> u32 {
     s[0..s.len() - 1].parse::<u32>().unwrap()
 }
 
-#[derive(Logos, Debug)]
+#[derive(Logos)]
 #[logos(
     skip r"[\n ]",
     skip "root@ebhq-gridcenter#",
@@ -107,10 +107,19 @@ fn count_viable_pairs(grid: &Network) -> u32 {
 fn shortest_number_of_moves(grid: &Network) -> i32 {
     let (key, _) = grid.iter().find(|(_, v)| v.used == 0).unwrap();
     let max_x = grid.iter().fold(0, |max, ((x, _), _)| max.max(*x));
-    let min_wall_x = grid.iter().filter(|(_, v)| v.size > 200).fold(i32::MAX, |min, (k, _)| min.min(k.0));
+    let min_wall_x = grid
+        .iter()
+        .filter(|(_, v)| v.size > 200)
+        .fold(i32::MAX, |min, (k, _)| min.min(k.0));
     let man_dist_around_wall = key.1 + (max_x - key.0).abs() + ((key.0 - min_wall_x + 1) * 2);
 
-    println!("{} + {} + {} = {}", key.1, (max_x - key.0).abs(), ((key.0 - min_wall_x + 1) * 2), key.1 + (max_x - key.0).abs() + ((key.0 - min_wall_x + 1) * 2));
+    println!(
+        "{} + {} + {} = {}",
+        key.1,
+        (max_x - key.0).abs(),
+        ((key.0 - min_wall_x + 1) * 2),
+        key.1 + (max_x - key.0).abs() + ((key.0 - min_wall_x + 1) * 2)
+    );
 
     // subtract 1 from max since by moving it the `man_dist_around_wall` amound, we would have pushed the
     // desired data into the next space with the hold on the opposite end as the goal. That means we only
@@ -126,7 +135,7 @@ fn part_1() {
     // rather than there being multiple disconnected networks.
     assert_eq!(946, count_viable_pairs(&grid));
     assert_eq!(195, shortest_number_of_moves(&grid));
-    
+
     // print_grid(&grid);
 }
 
