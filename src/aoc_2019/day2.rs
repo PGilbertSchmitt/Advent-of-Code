@@ -26,7 +26,7 @@ fn samples() {
     let mut cpu = IntCPU::new(SAMPLE_1);
     cpu.exec();
     assert_eq!(3500, cpu.get(0));
-    
+
     let mut cpu = IntCPU::new(SAMPLE_2);
     cpu.exec();
     assert_eq!(2, cpu.get(0));

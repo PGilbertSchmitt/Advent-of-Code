@@ -1,5 +1,9 @@
 fn parse_input(input: &str) -> Vec<i64> {
-    input.trim().split("\n").map(|x| x.parse().unwrap()).collect()
+    input
+        .trim()
+        .split("\n")
+        .map(|x| x.parse().unwrap())
+        .collect()
 }
 
 const INPUT: &str = include_str!("./inputs/day1.txt");

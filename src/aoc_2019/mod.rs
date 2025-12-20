@@ -10,8 +10,8 @@ pub mod day2;
 #[cfg(test)]
 pub mod day3;
 
-// #[cfg(test)]
-// pub mod day4;
+#[cfg(test)]
+pub mod day4;
 
 // #[cfg(test)]
 // pub mod day5;
@@ -75,4 +75,3 @@ pub mod day3;
 
 // #[cfg(test)]
 // pub mod day25;
-

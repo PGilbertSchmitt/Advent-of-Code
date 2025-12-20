@@ -152,7 +152,8 @@ fn intersections(verticals: Vec<Line>, horizontals: Vec<Line>) -> (i64, i64) {
             if let Some((x, y)) = v.intersects(h) {
                 if x != 0 || y != 0 {
                     closest_intersection = closest_intersection.min(x.abs() + y.abs());
-                    let delay = v.total_len + h.total_len + (v.start.1 - y).abs() + (h.start.0 - x).abs();
+                    let delay =
+                        v.total_len + h.total_len + (v.start.1 - y).abs() + (h.start.0 - x).abs();
                     intersection_with_least_delay = intersection_with_least_delay.min(delay);
                 }
             }

@@ -1,7 +1,11 @@
 type Program = Vec<i64>;
 
 pub fn parse_program(input: &str) -> Program {
-    input.trim().split(",").map(|x| x.parse().unwrap()).collect()
+    input
+        .trim()
+        .split(",")
+        .map(|x| x.parse().unwrap())
+        .collect()
 }
 
 pub struct IntCPU {
@@ -17,7 +21,11 @@ const QUIT: i64 = 99;
 
 impl IntCPU {
     fn parse_program(input: &str) -> Program {
-        input.trim().split(",").map(|x| x.parse().unwrap()).collect()
+        input
+            .trim()
+            .split(",")
+            .map(|x| x.parse().unwrap())
+            .collect()
     }
 
     pub fn new(input: &str) -> Self {
@@ -52,7 +60,7 @@ impl IntCPU {
                 ADD => self.add(),
                 MULT => self.mult(),
                 QUIT => break,
-                _ => unimplemented!()
+                _ => unimplemented!(),
             }
         }
     }
