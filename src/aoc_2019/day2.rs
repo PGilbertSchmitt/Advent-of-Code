@@ -45,7 +45,7 @@ fn samples() {
 }
 
 #[test]
-fn inputs() {
+fn solutions() {
     let mut cpu = IntCPU::new(INPUT);
     cpu.init(12, 2);
     cpu.exec();
