@@ -10,7 +10,7 @@ const SAMPLE_4: &str =
 const SAMPLE_5: &str = "3,52,1001,52,-5,52,3,53,1,52,56,54,1007,54,5,55,1005,55,26,1001,54,-5,54,1105,1,12,1,53,54,53,1008,54,0,55,1001,55,1,55,2,53,55,53,4,53,1001,56,-1,56,1005,56,6,99,0,0,0,0,10";
 const INPUT: &str = include_str!("./inputs/day7.txt");
 
-fn test_amplifier(program: &Program, config: Vec<i64>) -> i64 {
+fn test_amplifier(program: &Program, config: Vec<i128>) -> i128 {
     let mut last_output = 0;
     for x in config {
         let mut cpu = IntCPU::new(program);
@@ -22,19 +22,7 @@ fn test_amplifier(program: &Program, config: Vec<i64>) -> i64 {
     last_output
 }
 
-fn test_amplifier_with_feedback(program: &Program, config: &Vec<i64>) -> i64 {
-    // let mut a = IntCPU::new(program);
-    // let mut b = IntCPU::new(program);
-    // let mut c = IntCPU::new(program);
-    // let mut d = IntCPU::new(program);
-    // let mut e = IntCPU::new(program);
-
-    // a.push_input(config[0]);
-    // b.push_input(config[1]);
-    // c.push_input(config[2]);
-    // d.push_input(config[3]);
-    // e.push_input(config[4]);
-
+fn test_amplifier_with_feedback(program: &Program, config: &Vec<i128>) -> i128 {
     let mut amplifiers: Vec<IntCPU> = config
         .iter()
         .map(|&x| {
@@ -45,7 +33,6 @@ fn test_amplifier_with_feedback(program: &Program, config: &Vec<i64>) -> i64 {
         .collect();
 
     let mut final_output = 0;
-    // while amplifiers.last().unwrap().unfinished() {
     'outer: loop {
         let mut last_output = final_output;
         for amplifier in amplifiers.iter_mut() {
@@ -56,15 +43,14 @@ fn test_amplifier_with_feedback(program: &Program, config: &Vec<i64>) -> i64 {
                 break 'outer;
             }
         }
-        // This use of 2 trackers is incase the amplifiers don't finish at
-        // the same time
+        // This use of 2 trackers is incase the amplifiers don't finish at the same time
         final_output = last_output;
     }
 
     final_output
 }
 
-fn find_largest_amplification(program: &Program) -> i64 {
+fn find_largest_amplification(program: &Program) -> i128 {
     let mut largest_output = 0;
     for config in (0..5).permutations(5) {
         largest_output = largest_output.max(test_amplifier(program, config));
@@ -72,7 +58,7 @@ fn find_largest_amplification(program: &Program) -> i64 {
     largest_output
 }
 
-fn find_largest_amplification_with_feedback(program: &Program) -> i64 {
+fn find_largest_amplification_with_feedback(program: &Program) -> i128 {
     let mut largest_output = 0;
     for config in (5..10).permutations(5) {
         largest_output = largest_output.max(test_amplifier_with_feedback(program, &config));
